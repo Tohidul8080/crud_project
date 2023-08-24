@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block body_block%}
+<h3> Album of List</h3>
+<h3>Artist Name: {{artist_info.first_name}} {{artist_info.last_name}}</h3>
+<h3>Instrument Name: {{artist_info.instrument}}</h3>
+<h4> Artist Rating :{{artist_rating.num_stars__avg}}</h4>
+<a href="{% url 'crud_app:edit_artist' artist_id=artist_info.id %}" class="btn btn-primary btn-sm">Edit</a>
+<h2> List Of Album </h2>
+<table class="table table-bordered">
+<tr>
+<th>Album Name</th>
+<th> Release Date </th>
+<th>Rating </th>
+</tr>
+{% for album in album_list %}
+</tr>
+        <td><a href="{% url 'crud_app:edit_album' album_id=album.id %}">{{album.name}}</a></td>
+        <td>{{album.release_date|date:"M d, Y"}}</td>
+        <td>{{album.num_stars}}</td>
+
+</tr>
+{% endfor %}
+
+
+</table>
+<a href="{% url 'crud_app:delete_artist' artist_id=artist_info.id%}" onclick="return confirm('delete Musician')" class="btn btn-danger">Delete</a>
+
+{% endblock %}
